@@ -12,6 +12,7 @@
 		}
 		function remove_game(id){
 			var index = games.indexOf(id);
+			console.log(index);
 			games.splice(index, 1);
 			elem("gamelist").removeChild(elem(id));
 		}
