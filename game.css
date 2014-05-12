@@ -14,7 +14,7 @@ input, button{
   margin: 10px;
 }
 
-input[type=text]:active, button:active{
+input[type="submit"]:active, button:active{
   box-shadow: 3px 3px rgba(0, 0, 0, 0.23), 
               2px 2px rgba(0, 0, 0, 0.23), 
               1px 1px rgba(0, 0, 0, 0.23);
