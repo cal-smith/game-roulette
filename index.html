@@ -7,7 +7,7 @@
 			var game = elem("game").value;
 			games.push(game);
 			elem("gamelist").innerHTML += '<div>'+game+'</div>';
-			game.value="";
+			elem("game").value="";
 		}
 		function decide(){
 			var max = games.length;
