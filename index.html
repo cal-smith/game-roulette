@@ -11,7 +11,7 @@
 			elem("game").value="";
 		}
 		function remove_game(id){
-			games.splice(id, id);
+			games = games.splice(id, id);
 			elem("gamelist").removeChild(elem(id));
 		}
 		function decide(){
