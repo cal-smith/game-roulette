@@ -2,22 +2,27 @@
 <html>
 <head>
 	<script>
+	
 		function games(){
-			//elem("gamelist").innerHTML = "";
-			//var games = [];
-			//var game = elem("game").value;
-			//games.push("game");
-			//var max = games.length
-			//elem("gamelist").innerHTML += game
-			var max = elem("game").value;
-			var out = elem("out");
+			elem("gamelist").innerHTML = "";
+			var games = [];
+			var game = elem("game").value;
+			games.push(game);
+			var max = games.length;
+			elem("gamelist").innerHTML += game;
 			var random = Math.floor(Math.random()*max);
-			//out.innerHTML = games[random];
-			out.innerHTML = random;
+			out.innerHTML = games[random];
 			function elem(e){
 				return document.getElementById(e);
 			}
 		}
+		document.addEventListener("DOMContentLoaded", function(event) {
+			elem("gameform").addEventListener("submit", function(event){
+				event.stopPropagation();
+				event.preventDefault();
+				games();
+			});
+		});
 	</script>
 </head>
 <body>
