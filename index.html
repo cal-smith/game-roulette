@@ -7,8 +7,12 @@
 		function add_games(){
 			var game = elem("game").value;
 			games.push(game);
-			elem("gamelist").innerHTML += '<div>'+game+'</div>';
+			elem("gamelist").innerHTML += '<div id="'+games.length+'"><span>[<a onclick="remove_game('+games.length+')">remove</a>]</span>'+game+'</div>';
 			elem("game").value="";
+		}
+		function remove_game(id){
+			games.pop(id);
+			elem("gamelist").removeChild(id);
 		}
 		function decide(){
 			var max = games.length;
