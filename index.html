@@ -7,6 +7,7 @@
 			var game = elem("game").value;
 			games.push(game);
 			elem("gamelist").innerHTML += '<div>'+game+'</div>';
+			game.value="";
 		}
 		function decide(){
 			var max = games.length;
@@ -28,7 +29,8 @@
 <body>
 <h1 id="out">Game-Roulette!</h1>
 <form id="gameform">
-	<input id="game" type="text" placeholder="What Games?">	
+	<input id="game" type="text" placeholder="What Games?">
+	<input type="submit" value="Add Game">
 </form>
 <button onclick="decide()">Decide!</button>
 <div id="gamelist"></div>
