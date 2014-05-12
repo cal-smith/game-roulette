@@ -10,9 +10,6 @@
 			elem("gamelist").innerHTML += '<div>'+game+'</div>';
 			var random = Math.floor(Math.random()*max);
 			out.innerHTML = games[random];
-			function elem(e){
-				return document.getElementById(e);
-			}
 		}
 		document.addEventListener("DOMContentLoaded", function(event) {
 			elem("gameform").addEventListener("submit", function(event){
@@ -21,6 +18,9 @@
 				games();
 			});
 		});
+		function elem(e){
+			return document.getElementById(e);
+		}
 	</script>
 </head>
 <body>
