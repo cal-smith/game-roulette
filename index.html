@@ -2,20 +2,22 @@
 <html>
 <head>
 	<script>
-		var game_arr = [];
-		function games(){
+		var games = [];
+		function add_games(){
 			var game = elem("game").value;
-			game_arr.push(game);
-			var max = game_arr.length;
+			games.push(game);
 			elem("gamelist").innerHTML += '<div>'+game+'</div>';
+		}
+		function decide(){
+			var max = games.length;
 			var random = Math.floor(Math.random()*max);
-			out.innerHTML = game_arr[random];
+			out.innerHTML = games[random];
 		}
 		document.addEventListener("DOMContentLoaded", function(event) {
 			elem("gameform").addEventListener("submit", function(event){
 				event.stopPropagation();
 				event.preventDefault();
-				games();
+				add_games();
 			});
 		});
 		function elem(e){
@@ -28,6 +30,7 @@
 <form id="gameform">
 	<input id="game" type="text" placeholder="What Games?">	
 </form>
+<button onclick="decide()">Decide!</button>
 <div id="gamelist"></div>
 <!--
 what games? textbox
