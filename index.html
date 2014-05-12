@@ -5,7 +5,7 @@
 		var game_arr = [];
 		function games(){
 			var game = elem("game").value;
-			games_arr.push(game);
+			game_arr.push(game);
 			var max = game_arr.length;
 			elem("gamelist").innerHTML += '<div>'+game+'</div>';
 			var random = Math.floor(Math.random()*max);
