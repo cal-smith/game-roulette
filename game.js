@@ -15,9 +15,11 @@ function remove_game(id){
 	elem("gamelist").removeChild(elem(id));
 }
 function decide(){
-	var max = games.length;
-	var random = Math.floor(Math.random()*max);
-	out.innerHTML = games[random];
+	if(games.length > 0){
+		var max = games.length;
+		var random = Math.floor(Math.random()*max);
+		out.innerHTML = games[random];
+	}
 }
 document.addEventListener("DOMContentLoaded", function(event) {
 	elem("gameform").addEventListener("submit", function(event){
