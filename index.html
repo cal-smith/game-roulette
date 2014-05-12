@@ -11,6 +11,7 @@
 			elem("game").value="";
 		}
 		function remove_game(id){
+			id = id.trim();
 			var index = games.indexOf(id);
 			console.log(index);
 			games.splice(index, 1);
