@@ -2,14 +2,14 @@
 <html>
 <head>
 	<script>
-		var games = [];
+		var game_arr = [];
 		function games(){
 			var game = elem("game").value;
-			games.push(game);
-			var max = games.length;
+			games_arr.push(game);
+			var max = game_arr.length;
 			elem("gamelist").innerHTML += '<div>'+game+'</div>';
 			var random = Math.floor(Math.random()*max);
-			out.innerHTML = games[random];
+			out.innerHTML = game_arr[random];
 		}
 		document.addEventListener("DOMContentLoaded", function(event) {
 			elem("gameform").addEventListener("submit", function(event){
