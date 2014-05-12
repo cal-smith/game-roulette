@@ -1,9 +1,11 @@
 var games = [];
 function add_games(){
-	var game = elem("game").value;
-	games.push(game);
-	elem("gamelist").innerHTML += "<div id="+game+"><span>[<a href='#' onclick=remove_game('"+game+"')>remove</a>]&nbsp;&nbsp;</span>"+game+"</div>";
-	elem("game").value="";
+	if (elem("game").value !== ""){
+		var game = elem("game").value;
+		games.push(game);
+		elem("gamelist").innerHTML += "<div id="+game+"><span>[<a href='#' onclick=remove_game('"+game+"')>remove</a>]&nbsp;&nbsp;</span>"+game+"</div>";
+		elem("game").value="";
+	}
 }
 function remove_game(id){
 	var id = id.trim();
