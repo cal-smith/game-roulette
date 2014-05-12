@@ -12,7 +12,7 @@
 		}
 		function remove_game(id){
 			games.pop(id);
-			elem("gamelist").removeChild(id);
+			elem("gamelist").removeChild(elem(id));
 		}
 		function decide(){
 			var max = games.length;
