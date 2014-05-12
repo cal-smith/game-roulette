@@ -7,7 +7,7 @@
 		function add_games(){
 			var game = elem("game").value;
 			games.push(game);
-			elem("gamelist").innerHTML += '<div id="'+games.length+'"><span>[<a href="#" onclick="remove_game('+games.length+')">remove</a>]&nbsp;&nbsp;</span>'+game+'</div>';
+			elem("gamelist").innerHTML += '<div id="'+games.length-1+'"><span>[<a href="#" onclick="remove_game('+games.length-1+')">remove</a>]&nbsp;&nbsp;</span>'+game+'</div>';
 			elem("game").value="";
 		}
 		function remove_game(id){
