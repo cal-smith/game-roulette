@@ -2,14 +2,12 @@
 <html>
 <head>
 	<script>
-	
+		var games = [];
 		function games(){
-			elem("gamelist").innerHTML = "";
-			var games = [];
 			var game = elem("game").value;
 			games.push(game);
 			var max = games.length;
-			elem("gamelist").innerHTML += game;
+			elem("gamelist").innerHTML += '<div>'+game+'</div>';
 			var random = Math.floor(Math.random()*max);
 			out.innerHTML = games[random];
 			function elem(e){
@@ -27,7 +25,9 @@
 </head>
 <body>
 <h1 id="out">Game-Roulette!</h1>
-<input id="game" type="text" placeholder="What Games?">
+<form id="gameform">
+	<input id="game" type="text" placeholder="What Games?">	
+</form>
 <div id="gamelist"></div>
 <!--
 what games? textbox
