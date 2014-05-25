@@ -1,14 +1,16 @@
 var games = [],
 	room = window.location.pathname.slice(1),
-	socket = io.connect('http://localhost');
+	socket = io.connect('http://localhost'),
 	init = false;
-function add_games(game, id){
+function add_games(game){
 	games.push(game);
+	var id = game.replace(/\s+/g, "_");
 	elem("gamelist").innerHTML += "<div id="+id+"><span>[<a href='#' onclick=send_remove('"+id+"')>remove</a>]&nbsp;&nbsp;</span>"+game+"</div>";
 }
 
-function remove_game(id){
-	var id = id.trim();
+function remove_game(game){
+	var id = game.replace(/\s+/g, "_");
+	id = id.trim();
 	var index = games.indexOf(id);
 	console.log(index);
 	games.splice(index, 1);
@@ -16,7 +18,8 @@ function remove_game(id){
 }
 
 function send_remove(id){
-	socket.emit('remove', {'id':id, 'room':room});
+	var game = id.replace(/_+/g, " ");
+	socket.emit('remove', {'game':game, 'room':room});
 }
 
 function decide(){
@@ -25,46 +28,43 @@ function decide(){
 
 document.addEventListener("DOMContentLoaded", function(event) {
 	elem("gameform").addEventListener("submit", function(event){
-		//event.stopPropagation();
 		event.preventDefault();
-		var game,
-			id;
+		var game;
 		if (elem("game").value !== ""){
 			game = elem("game").value;
-			id = game.replace(/\s+/g, "_");
 			elem("game").value="";
 		}
-		socket.emit('add', {"room":room, "game":game, "id":id});
+		if (games.indexOf(game) === -1){
+			socket.emit('add', {"room":room, "game":game});
+		}
 	});
 
 	socket.on('init', function(data){
 		if (!init){
 			for (var i = 0; i < data.games.length; i++) {
 				add_games(data.games[i]);
-				init = true;
+				elem("out").innerHTML = data.random;
 			}
 		}
+		init = true;
 	});
 
-	socket.on('do_init', function(data){
-		if (data.first){
-			init = true;
-		} else {
-			socket.emit('do_init', {"room":room, "games":games});
-		}
+	socket.on('room_init', function(data){
+		init = true;
 	});
 
 	socket.emit('sub', {"room":room});
+
 	socket.on('add', function(data){
-		add_games(data.game, data.id);
+		add_games(data.game);
 	});
 
 	socket.on('remove', function(data){
-		remove_game(data.id);
+		remove_game(data.game);
 	});
 
 	socket.on('decide', function(data){
-		elem("out").innerHTML = games[data.random];
+		elem("out").innerHTML = data.random;
 	});
 });
 function elem(e){
