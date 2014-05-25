@@ -6,10 +6,10 @@ var Db = require('mongodb').Db,
 	Server = require('mongodb').Server,
 	Connection = require('mongodb').Connection;
 
-var db = new Db('game', new Server(process.env.OPENSHIFT_MONGODB_DB_HOST, process.env.OPENSHIFT_MONGODB_DB_PORT));
+var db = new Db('game', new Server(process.env.OPENSHIFT_MONGODB_DB_HOST, parseInt(process.env.OPENSHIFT_MONGODB_DB_PORT)));
 
 db.open(function(err, db) {
-	db.authenticate('admin', 'j329Bp7Vt8uj', function(err, result) {});
+	db.authenticate(process.env.OPENSHIFT_MONGODB_DB_USERNAME, process.env.OPENSHIFT_MONGODB_DB_PASSWORD, function(err, result) {});
 });
 
 app.use(express.static(__dirname + '/public'));
