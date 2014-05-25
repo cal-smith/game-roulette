@@ -1,6 +1,6 @@
 var games = [],
 	room = window.location.pathname.slice(1),
-	socket = io.connect('http://localhost'),
+	socket = io.connect(window.location.origin+':8000'),
 	init = false;
 function add_games(game){
 	games.push(game);

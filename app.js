@@ -6,9 +6,11 @@ var Db = require('mongodb').Db,
 	Server = require('mongodb').Server,
 	Connection = require('mongodb').Connection;
 
-var db = new Db('game', new Server('localhost', 27017));
+var db = new Db('game', new Server(process.env.OPENSHIFT_MONGODB_DB_HOST, process.env.OPENSHIFT_MONGODB_DB_PORT));
 
-db.open(function(err, db) {});
+db.open(function(err, db) {
+	db.authenticate('admin', 'j329Bp7Vt8uj', function(err, result) {});
+});
 
 app.use(express.static(__dirname + '/public'));
 
@@ -70,4 +72,8 @@ io.sockets.on('connection', function(socket){
 	});
 });
 
-server.listen(8080);
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+server.listen(server_port, server_ip_address, function () {
+	console.log( "Listening on " + server_ip_address + ", server_port " + port );
+});
