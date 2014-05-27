@@ -6,10 +6,14 @@ var Db = require('mongodb').Db,
 	Server = require('mongodb').Server,
 	Connection = require('mongodb').Connection;
 
-var db = new Db('game', new Server(process.env.OPENSHIFT_MONGODB_DB_HOST, parseInt(process.env.OPENSHIFT_MONGODB_DB_PORT)));
+var dbhost = process.env.OPENSHIFT_MONGODB_DB_HOST || "localhost",
+	dbport = process.env.OPENSHIFT_MONGODB_DB_PORT || 27017;
+var db = new Db('game', new Server(dbhost, parseInt(dbport)));
 
 db.open(function(err, db) {
-	db.authenticate(process.env.OPENSHIFT_MONGODB_DB_USERNAME, process.env.OPENSHIFT_MONGODB_DB_PASSWORD, function(err, result) {});
+	if (process.env.OPENSHIFT_MONGODB_DB_USERNAME) {
+		db.authenticate(process.env.OPENSHIFT_MONGODB_DB_USERNAME, process.env.OPENSHIFT_MONGODB_DB_PASSWORD, function(err, result) {});
+	}
 });
 
 app.use(express.static(__dirname + '/public'));
@@ -20,6 +24,10 @@ app.get('/', function(req, res){
 		return v.toString(16);
 	});
 	res.redirect('/'+id);
+});
+
+app.get('/about', function(req, res){
+	res.sendfile(__dirname + '/about.html');
 });
 
 app.get('/:id', function(req, res){

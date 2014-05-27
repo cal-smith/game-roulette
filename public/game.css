@@ -25,3 +25,13 @@ input[type="submit"]:active, button:active{
 #gamelist{
   margin: 10px;
 }
+
+.info{
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
+
+.about{
+  max-width: 600px;
+}
