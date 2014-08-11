@@ -27,7 +27,7 @@ input[type="submit"]:active, button:active{
 }
 
 .info{
-  position: absolute;
+  position: fixed;
   right: 5px;
   bottom: 5px;
 }
