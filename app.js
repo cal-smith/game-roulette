@@ -34,6 +34,10 @@ app.get('/:id', function(req, res){
 	res.sendfile(__dirname + '/index.html');
 });
 
+app.get('/dbinfo', function(req, res){
+	
+});
+
 io.sockets.on('connection', function(socket){
 	socket.on('sub', function(data){
 		socket.join(data.room);
